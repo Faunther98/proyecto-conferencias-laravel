@@ -15,6 +15,16 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    <!-- NAV EVENTOS WEB    -->
+
+                    <x-nav-link :href="route('eventos.index')" :active="request()->routeIs('eventos.*')" wire:navigate>
+                        {{ __('Eventos') }}
+                    </x-nav-link>
+
+
+
+
                     @canany(['consultar-listado-usuarios', 'registrar-usuario', 'cambiar-estatus-usuario'])
                     <x-nav-link :href="route('admin.usuarios.index')" :active="request()->routeIs('admin.usuarios.index')">
                         {{ __('Administración de usuarios') }}
@@ -27,6 +37,10 @@
                     @endcanany
                 </div>
             </div>
+
+
+
+
 
             <!-- Settings Dropdown -->
             <div class="hidden lg:flex lg:items-center lg:ms-6">
@@ -80,6 +94,13 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            <!-- EVENTOS MOBILE -->
+            
+            <x-responsive-nav-link :href="route('eventos.index')" :active="request()->routeIs('eventos.*')" wire:navigate>
+                {{ __('Eventos') }}
+            </x-responsive-nav-link>
+
             @canany(['consultar-listado-usuarios', 'registrar-usuario', 'cambiar-estatus-usuario'])
             <x-responsive-nav-link :href="route('admin.usuarios.index')" :active="request()->routeIs('admin.usuarios.index')">
                 {{ __('Administración de usuarios') }}
