@@ -5,9 +5,15 @@ use App\Livewire\Roles\ListarRolesComponent;
 use App\Livewire\Usuarios\ListarUsuariosComponent;
 use Illuminate\Support\Facades\Route;
 
+/*
 Route::get('/', function () {
     return view('welcome');
 });
+*/
+
+
+Route::get('/', \App\Livewire\Publico\HomeComponent::class)->name('home');
+
 
 Route::get('/hola', function () {
     return '<h1>Probando cómo se conecta routes</h1>';
