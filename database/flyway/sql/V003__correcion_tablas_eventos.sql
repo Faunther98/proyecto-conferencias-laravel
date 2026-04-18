@@ -1,6 +1,12 @@
 
 
 --TABLA EVENTOS
+--Borrando para que no fallé
+
+DROP TABLE IF EXISTS inscripciones CASCADE;
+DROP TABLE IF EXISTS sesiones CASCADE;
+DROP TABLE IF EXISTS eventos CASCADE;
+
 
 CREATE TABLE eventos (
     id_evento SERIAL PRIMARY KEY,
