@@ -4,10 +4,11 @@ namespace App\Models;
 
 use App\Enums\EstatusEnum;
 use App\QueryBuilders\UsuarioQueryBuilder;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Modulos\Inscripciones\Models\Inscripcion;
 use Spatie\Permission\Traits\HasRoles;
 
 class Usuario extends Authenticatable
@@ -15,6 +16,8 @@ class Usuario extends Authenticatable
     use HasFactory;
     use Notifiable;
     use HasRoles;
+
+    
 
     protected $table = 'usuario';
     protected $primaryKey = 'id_usuario';
@@ -74,5 +77,11 @@ class Usuario extends Authenticatable
             'password' => 'hashed',
             'activo' => EstatusEnum::class,
         ];
+    }
+
+
+    public function inscripciones(){
+        return $this->hasMany(Inscripcion::class, 'id_usuario', 'id_usuario');
+
     }
 }

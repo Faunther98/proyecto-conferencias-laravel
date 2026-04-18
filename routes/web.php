@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Roles\ListarRolesComponent;
 use App\Livewire\Usuarios\ListarUsuariosComponent;
+use App\Models\Usuario;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,7 +33,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/usuarios', ListarUsuariosComponent::class)->name('admin.usuarios.index')->middleware('permission:consultar-listado-usuarios|registrar-usuario|cambiar-estatus-usuario');
     Route::get('/roles', ListarRolesComponent::class)->name('admin.roles.index')->middleware('permission:consultar-listado-roles|registrar-rol');
 
-
 // Rutas para el módulo de Eventos
 
     Route::get('/eventos', function () {
@@ -42,7 +42,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/eventos/crear', function () {
         return "Aquí estará el formulario para crear un evento";
     })->name('eventos.create');
-
 
 
 });

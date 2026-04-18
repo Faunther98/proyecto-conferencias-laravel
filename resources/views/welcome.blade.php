@@ -41,7 +41,6 @@
                         @endauth
                         </nav>
                     </main>
-
                     <footer class="py-16">
                         <p class="text-center text-sm text-white"> UNAM {{ date('Y') }} </p>
                         <p class="text-center"><a href="{{ route('creditos') }}"  class=" text-sm text-white">Créditos</a></p>

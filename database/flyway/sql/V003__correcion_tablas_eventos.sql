@@ -5,7 +5,8 @@
 CREATE TABLE eventos (
     id_evento SERIAL PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
-    fecha DATE NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    fecha_fin DATE NOT NULL,
     lugar VARCHAR(255) NOT NULL,
     capacidad INTEGER NOT NULL,
     estado VARCHAR(20) DEFAULT 'S',
