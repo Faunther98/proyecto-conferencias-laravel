@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Eventos\ListarEventosComponent;
 use App\Livewire\Roles\ListarRolesComponent;
 use App\Livewire\Usuarios\ListarUsuariosComponent;
 use App\Models\Usuario;
@@ -13,12 +14,13 @@ Route::get('/', function () {
 */
 
 
+// VISTA HOME 
+
 Route::get('/', \App\Livewire\Publico\HomeComponent::class)->name('home');
 
 
-Route::get('/hola', function () {
-    return '<h1>Probando cómo se conecta routes</h1>';
-});
+
+
 
 
 Route::get('/inicio', function () {
@@ -29,20 +31,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
     Route::get('/usuarios', ListarUsuariosComponent::class)->name('admin.usuarios.index')->middleware('permission:consultar-listado-usuarios|registrar-usuario|cambiar-estatus-usuario');
     Route::get('/roles', ListarRolesComponent::class)->name('admin.roles.index')->middleware('permission:consultar-listado-roles|registrar-rol');
-
 // Rutas para el módulo de Eventos
-
-    Route::get('/eventos', function () {
-        return "Aquí listaremos los eventos próximamente";
-    })->name('eventos.index');
-
-    Route::get('/eventos/crear', function () {
-        return "Aquí estará el formulario para crear un evento";
-    })->name('eventos.create');
-
+    Route::get('/eventos', ListarEventosComponent::class)->name('eventos.listar');
 
 });
 

@@ -4,6 +4,7 @@ namespace Modulos\Eventos\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Modulos\Eventos\Enums\EstatusEventoEnum;
 use Modulos\Inscripciones\Models\Inscripcion;
 
 class Evento extends Model
@@ -11,7 +12,7 @@ class Evento extends Model
     use HasFactory;
 
     protected $table = 'eventos';
-    protected $primaryKey = 'id_eventos';
+    protected $primaryKey = 'id_evento';
 
     protected $fillable = [
         'nombre',
@@ -20,6 +21,12 @@ class Evento extends Model
         'lugar',
         'capacidad',
         'estado'
+    ];
+
+    protected $casts = [
+        'fecha_inicio' => 'date',
+        'fecha_fin' => 'date',
+        'estado' => EstatusEventoEnum::class,
     ];
 
 

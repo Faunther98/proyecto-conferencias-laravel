@@ -18,9 +18,12 @@
 
                     <!-- NAV EVENTOS WEB    -->
 
-                    <x-nav-link :href="route('eventos.index')" :active="request()->routeIs('eventos.*')" wire:navigate>
-                        {{ __('Eventos') }}
-                    </x-nav-link>
+
+                     {{--  @canany(['consultar-listado-eventos', 'crear-evento']) --}}
+                        <x-nav-link :href="route('eventos.listar')" :active="request()->routeIs('eventos.*')" wire:navigate>
+                            {{ __('Gestión de Eventos') }}
+                        </x-nav-link>
+                    {{--@endcanany --}}                  
 
 
 
@@ -96,10 +99,14 @@
             </x-responsive-nav-link>
 
             <!-- EVENTOS MOBILE -->
-            
-            <x-responsive-nav-link :href="route('eventos.index')" :active="request()->routeIs('eventos.*')" wire:navigate>
-                {{ __('Eventos') }}
-            </x-responsive-nav-link>
+
+
+            {{--  @canany(['consultar-listado-eventos', 'crear-evento']) --}}
+                <x-responsive-nav-link :href="route('eventos.listar')" :active="request()->routeIs('eventos.*')" wire:navigate>
+                    {{ __('Gestión de Eventos') }}
+                </x-responsive-nav-link>
+            {{-- @endcanany --}}
+
 
             @canany(['consultar-listado-usuarios', 'registrar-usuario', 'cambiar-estatus-usuario'])
             <x-responsive-nav-link :href="route('admin.usuarios.index')" :active="request()->routeIs('admin.usuarios.index')">
