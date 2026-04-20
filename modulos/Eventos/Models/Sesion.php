@@ -17,7 +17,9 @@ class Sesion extends Model
     protected $primaryKey = 'id_sesion';
 
     protected $fillable = [
+        
         'id_evento',
+        'nombre',
         'fecha',
         'hora_inicio',
         'hora_fin',

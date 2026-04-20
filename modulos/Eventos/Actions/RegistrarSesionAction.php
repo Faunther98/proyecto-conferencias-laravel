@@ -26,6 +26,7 @@ class RegistrarSesionAction
                 // si hubo cambios se actualiza
                 $sesion->update([
                     'id_evento'   => $form->id_evento,
+                    'nombre'      => $form->nombre,
                     'fecha'       => $form->fecha,
                     'hora_inicio' => $form->hora_inicio,
                     'hora_fin'    => $form->hora_fin,
@@ -36,6 +37,7 @@ class RegistrarSesionAction
                 // si no hay $idSesion, se crea una nueva
                 $sesion = Sesion::create([
                     'id_evento'   => $form->id_evento,
+                    'nombre'      => $form->nombre,
                     'fecha'       => $form->fecha,
                     'hora_inicio' => $form->hora_inicio,
                     'hora_fin'    => $form->hora_fin,

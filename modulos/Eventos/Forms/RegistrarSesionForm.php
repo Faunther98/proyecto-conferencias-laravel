@@ -19,6 +19,7 @@ class RegistrarSesionForm extends Form
     public $hora_inicio;
     public $hora_fin;
     public $ponente;
+    public $nombre;
     public $estado = EstatusEventoEnum::Activo->value;
     public $esEdicion = false;
 
@@ -26,6 +27,7 @@ class RegistrarSesionForm extends Form
     {
         return[
             'id_evento' => 'Evento',
+            'nombre' => ['Nombre de la sesión'],
             'fecha' => 'Fecha de la sesión',
             'hora_inicio' => 'Hora de inicio de la sesión',
             'hora_fin' => 'Hora de termino de la sesión',
@@ -37,7 +39,9 @@ class RegistrarSesionForm extends Form
     public function rules(): array
     {
         return[
+    
             'id_evento' => ['required', 'integer', 'exists:eventos,id_evento'],
+            'nombre' => ['required', 'string', 'max:255'],
             'fecha' => ['required', 'date'],
             'hora_inicio' => ['required', 'date_format:H:i'],
             'hora_fin' => ['required', 'date_format:H:i', 'after:hora_inicio'],
@@ -72,6 +76,7 @@ class RegistrarSesionForm extends Form
             $this->hora_inicio = Carbon::parse($sesion->hora_inicio)->format('H:i');
             $this->hora_fin = Carbon::parse($sesion->hora_fin)->format('H:i');
 
+            $this->nombre = $sesion->nombre;
             $this->ponente = $sesion->ponente;
             $this->estado = $sesion->estado;
         }
@@ -94,6 +99,7 @@ class RegistrarSesionForm extends Form
        
         $actual = $this->arrayFilterRecursive([
             'id_evento'   => $this->id_evento,
+            'nombre'      => $this->nombre,
             'fecha'       => $this->fecha,
             'hora_inicio' => $this->hora_inicio,
             'hora_fin'    => $this->hora_fin,
@@ -104,6 +110,7 @@ class RegistrarSesionForm extends Form
         
         $original = $this->arrayFilterRecursive([
             'id_evento'   => $db->id_evento,
+            'nombre'      => $db->nombre,
             'fecha'       => $db->fecha,
             'hora_inicio' => Carbon::parse($db->hora_inicio)->format('H:i'), 
             'hora_fin'    => Carbon::parse($db->hora_fin)->format('H:i'),

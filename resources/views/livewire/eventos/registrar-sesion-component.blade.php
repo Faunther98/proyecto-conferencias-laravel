@@ -12,6 +12,19 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                {{-- Nombre de la Sesión --}}
+                <div class="flex flex-col md:col-span-2">
+                    <x-input-label>
+                        Nombre de la sesión <span class="text-red-500">*</span>
+                    </x-input-label>
+                    <input type="text" wire:model="form.nombre" wire:blur="liveValidation('nombre')" 
+                
+                        class="border border-gray-300 p-2 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                    @error('form.nombre')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
                 
                 {{-- Ponente --}}
                 <div class="flex flex-col md:col-span-2">
