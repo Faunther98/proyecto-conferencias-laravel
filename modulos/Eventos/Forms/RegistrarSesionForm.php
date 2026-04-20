@@ -27,7 +27,7 @@ class RegistrarSesionForm extends Form
     {
         return[
             'id_evento' => 'Evento',
-            'nombre' => ['Nombre de la sesión'],
+            'nombre' => 'Nombre de la sesión',
             'fecha' => 'Fecha de la sesión',
             'hora_inicio' => 'Hora de inicio de la sesión',
             'hora_fin' => 'Hora de termino de la sesión',

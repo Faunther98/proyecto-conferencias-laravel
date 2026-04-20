@@ -32,15 +32,50 @@ class RolesPermisosSeeder extends Seeder
         $role->givePermissionTo('registrar-rol');
         $role->givePermissionTo('consultar-listado-roles');
 
-        $adminUser = Usuario::create([
-            'nombre' => 'Admin',
-            'primer_apellido' => 'Admin',
-            'segundo_apellido' => 'Admin',
-            'email' => 'admin@mail.com',
-            'curp' => 'AAAA000000AAAAAA00',
-            'password' => bcrypt('password'),
-        ]);
+        $adminUser = Usuario::firstOrCreate(
+            ['email' => 'admin@mail.com'], 
+            
+            [ 
+                'nombre' => 'Admin',
+                'primer_apellido' => 'Admin',
+                'segundo_apellido' => 'Admin',
+                'curp' => 'AAAA000000AAAAAA00',
+                'password' => bcrypt('password'),
+            ]
+        );
 
         $adminUser->assignRole('administrador');
+
+        Role::firstOrCreate(['name' => 'organizador']);
+        Role::firstOrCreate(['name' => 'asistente']);
+
+        $organizadorUser = Usuario::firstOrCreate(
+            ['email' => 'organizador@mail.com'], 
+
+            [ 
+                'nombre' => 'Organizador',
+                'primer_apellido' => 'Organizador',
+                'segundo_apellido' => 'Organizador',
+                'curp' => 'ORGA000000AAAAAA00',
+                'password' => bcrypt('password'),
+            ]
+        );
+        $organizadorUser->assignRole('organizador');
+
+        $asistenteUser = Usuario::firstOrCreate(
+            ['email' => 'asistente@mail.com'],
+            [
+                'nombre' => 'Asistente',
+                'primer_apellido' => 'Asistente',
+                'segundo_apellido' => 'Asistente',
+                'curp' => 'ASIS000000AAAAAA00',
+                'password' => bcrypt('password'),
+            ]
+        );
+        $asistenteUser->assignRole('asistente');
+
+
+
+
     }
 }

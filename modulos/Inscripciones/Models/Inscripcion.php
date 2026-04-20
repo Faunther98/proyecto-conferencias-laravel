@@ -12,6 +12,7 @@ use Modulos\Eventos\Models\Evento;
 class Inscripcion extends Model
 {
     use HasFactory;
+    
     protected $table = 'inscripciones';
     protected $primaryKey = 'id_inscripcion';
 

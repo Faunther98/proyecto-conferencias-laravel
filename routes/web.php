@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Eventos\ListarEventosComponent;
 use App\Livewire\Eventos\ListarSesionesComponent;
+use App\Livewire\Inscripciones\ListarInscripcionesUsuarioComponent;
+use App\Livewire\Publico\CarteleraEventosComponent;
 use App\Livewire\Roles\ListarRolesComponent;
 use App\Livewire\Usuarios\ListarUsuariosComponent;
 use App\Models\Usuario;
@@ -17,7 +19,7 @@ Route::get('/', function () {
 
 // VISTA HOME 
 
-Route::get('/', \App\Livewire\Publico\HomeComponent::class)->name('home');
+Route::get('/', CarteleraEventosComponent::class)->name('home');
 
 
 
@@ -38,7 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/eventos', ListarEventosComponent::class)->name('eventos.listar');
 //Ruta sesiones
 Route::get('/eventos/{evento}/sesiones', ListarSesionesComponent::class)->name('eventos.sesiones');
-
+//Ruta mis inscripciones
+Route::get('/mis-inscripciones', ListarInscripcionesUsuarioComponent::class)->name('asistente.inscripciones');
 });
 
 Route::get('/creditos', function () {

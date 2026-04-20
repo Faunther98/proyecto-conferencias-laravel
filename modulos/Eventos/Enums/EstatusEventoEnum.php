@@ -18,7 +18,7 @@ enum EstatusEventoEnum :string
         };
     }
 
-    public function color(): bool
+    public function color(): string
     {
         return match ($this) {
             self::Activo => 'bg-green-100 text-green-800',
