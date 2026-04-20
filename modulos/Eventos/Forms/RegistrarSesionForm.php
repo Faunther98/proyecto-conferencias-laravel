@@ -101,7 +101,7 @@ class RegistrarSesionForm extends Form
             'estado'      => $this->estado,
         ], null, true);
 
-        /
+        
         $original = $this->arrayFilterRecursive([
             'id_evento'   => $db->id_evento,
             'fecha'       => $db->fecha,

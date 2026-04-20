@@ -5,7 +5,7 @@ namespace Modulos\Eventos\Actions;
 use App\Enums\AccionEnum;
 use App\Enums\RegistroTipoEnum;
 use App\Models\Bitacora;
-use App\Models\Sesion;
+use Modulos\Eventos\Models\Sesion;
 use Illuminate\Support\Facades\DB;
 use Modulos\Eventos\Forms\RegistrarSesionForm;
 
@@ -20,7 +20,7 @@ class RegistrarSesionAction
             if ($idSesion){
                 $sesion =Sesion::findOrFail($idSesion);
 
-                if (!form->isDirty()){
+                if (!$form->isDirty()){
                     return $sesion;
                 }
                 // si hubo cambios se actualiza

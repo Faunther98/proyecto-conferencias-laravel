@@ -17,11 +17,6 @@ class EliminarEventoComponent extends Component
     public $modalAbierto = false;
 
 
-    public function render()
-    {
-        return view('livewire.eventos.eliminar-evento-component');
-    }
-
     #[On('abrir-modal-eliminar-evento')]
     public function abrirModal($idEvento, $nombreEvento)
     {
@@ -44,5 +39,10 @@ class EliminarEventoComponent extends Component
         }catch(\Exception $e){
             $this->error(__('messages.error_inesperado'));
         }
+    }
+
+    public function render()
+    {
+        return view('livewire.eventos.eliminar-evento-component');
     }
 }

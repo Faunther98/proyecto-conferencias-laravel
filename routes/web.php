@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Eventos\ListarEventosComponent;
+use App\Livewire\Eventos\ListarSesionesComponent;
 use App\Livewire\Roles\ListarRolesComponent;
 use App\Livewire\Usuarios\ListarUsuariosComponent;
 use App\Models\Usuario;
@@ -35,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/roles', ListarRolesComponent::class)->name('admin.roles.index')->middleware('permission:consultar-listado-roles|registrar-rol');
 // Rutas para el módulo de Eventos
     Route::get('/eventos', ListarEventosComponent::class)->name('eventos.listar');
+//Ruta sesiones
+Route::get('/eventos/{evento}/sesiones', ListarSesionesComponent::class)->name('eventos.sesiones');
 
 });
 

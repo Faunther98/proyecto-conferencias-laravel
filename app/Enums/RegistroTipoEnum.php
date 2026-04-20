@@ -16,6 +16,7 @@ enum RegistroTipoEnum
             self::Rol => 'rol',
 
             self::Evento => 'evento',
+            self::Sesion => 'sesion',
         };
     }
 
