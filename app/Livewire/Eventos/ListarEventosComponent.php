@@ -30,4 +30,9 @@ class ListarEventosComponent extends Component
         return view('livewire.eventos.listar-eventos-component');
     }
 
+    public function eliminarEvento()
+    {
+        
+    }
+
 }

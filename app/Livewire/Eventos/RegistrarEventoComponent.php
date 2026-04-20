@@ -55,7 +55,7 @@ class RegistrarEventoComponent extends Component
         try{
             $this->form->validate();
         } catch (\Exception $e){
-            $this->error('AQUI DEBE IR LA RUTA DE MENSAJE PERSONALIZADO');
+            $this->error(__('messages.error_inesperado'));
             throw $e;
         }
         try{
@@ -64,13 +64,13 @@ class RegistrarEventoComponent extends Component
 
             //para refrescar la tabla con la nueva info
             $this->dispatch('actualizar-lista-eventos');
-            $mensaje = $this->form->esEdicion ? 'RUTA MESSAGES' : 'RUTA MESSAGES';
+            $mensaje = $this->form->esEdicion ? __('messages.evento_actualizado') : __('messages.evento_creado');
             //muestra el mensaje verde
             $this->success($mensaje);
             // se limpia
             $this->restablecer(); 
         } catch (\Exception $e){
-            $this->error($mensaje);
+            $this->error(__('messages.error_inesperado'));
         }
     }
 

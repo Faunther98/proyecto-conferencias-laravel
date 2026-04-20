@@ -1,38 +1,66 @@
 <?php
 
 namespace Modulos\Eventos\Actions;
+
+use App\Enums\AccionEnum;
+use App\Enums\RegistroTipoEnum;
+use App\Models\Bitacora;
+use Illuminate\Support\Facades\DB;
 use Modulos\Eventos\Forms\RegistrarEventoForm;
 use Modulos\Eventos\Models\Evento;
 
 class RegistrarEventoAction
 {
-
+    // $form  de tipo RegistrarEventoForm
     public static function execute(RegistrarEventoForm $form, $idUsuarioActual, $idEvento = null)
     {
-     
-        if ($idEvento) {
-        
-            $evento = Evento::findOrFail($idEvento);
+        // transacción
+        return DB::transaction(function () use ($form, $idUsuarioActual, $idEvento) {
             
-            if (!$form->isDirty()) {
-                return $evento; 
+            // es edición o registro para la bitácora?
+            $idAccion = $idEvento ? AccionEnum::Modificacion : AccionEnum::Registro;
+
+            if ($idEvento) {
+                // se busca el evento existente
+                $evento = Evento::findOrFail($idEvento);
+                
+                // 3. si es edición y no se cambió nada,se termina.
+                if (!$form->isDirty()) {
+                    return $evento; 
+                }
+                
+                // si hubo cambios actualiza
+                $evento->update([
+                    'nombre' => $form->nombre,
+                    'lugar' => $form->lugar,
+                    'fecha_inicio' => $form->fecha_inicio,
+                    'fecha_fin' => $form->fecha_fin,
+                    'capacidad' => $form->capacidad,
+                    'estado' => $form->estado,
+                ]);
+
+            } else {
+                // si no hay $idEvento, se crea uno nuevo
+                $evento = Evento::create([
+                    'nombre' => $form->nombre,
+                    'lugar' => $form->lugar,
+                    'fecha_inicio' => $form->fecha_inicio,
+                    'fecha_fin' => $form->fecha_fin,
+                    'capacidad' => $form->capacidad,
+                    'estado' => $form->estado,
+                ]);
             }
-        } else {
-        
-            $evento = new Evento();
-        }
 
-        $evento->nombre = $form->nombre;
-        $evento->lugar = $form->lugar;
-        $evento->fecha_inicio = $form->fecha_inicio;
-        $evento->fecha_fin = $form->fecha_fin;
-        $evento->capacidad = $form->capacidad;
-        $evento->estado = $form->estado;
+            // se usa el query builder
+            Bitacora::registrar(
+                $idAccion, 
+                $idUsuarioActual, 
+                $evento->id_evento, 
+                RegistroTipoEnum::Evento 
+            );
 
-        $evento->save();
-
-        // Pendiente egistrar aquí quién hizo el cambio en una bitácora.
-
-        return $evento; 
+           
+            return $evento; 
+        });
     }
 }

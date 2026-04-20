@@ -64,7 +64,7 @@
                                         <x-action-button 
                                             class="bg-red-600" 
                                             data-tippy="Eliminar"
-                                            wire:click="$dispatch('abrir-modal-eliminar-evento', { idEvento: {{ $evento->id_evento }}, nombre: '{{ $evento->nombre }}' })"
+                                            wire:click="$dispatch('abrir-modal-eliminar-evento', { idEvento: {{ $evento->id_evento }}, nombreEvento: '{{ $evento->nombre }}' })"
                                         >
                                             <i class="fa-solid fa-trash"></i>
                                         </x-action-button>
@@ -85,6 +85,7 @@
                 </table>
             </div>
             <livewire:eventos.registrar-evento-component />
+            <livewire:eventos.eliminar-evento-component/>
         </div>
 
 </div>
