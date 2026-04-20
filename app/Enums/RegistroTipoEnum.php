@@ -7,6 +7,7 @@ enum RegistroTipoEnum
     case Usuario;
     case Rol;
     case Evento;
+    case Sesion;
 
     public function registroTipo()
     {
@@ -25,6 +26,7 @@ enum RegistroTipoEnum
             self::Rol => 'Roles que se pueden asignar a los usuarios.',
 
             self::Evento=> 'Registro de eventos del sistema',
+            self::Sesion=> 'Registro de sesiones del sistema',
         };
     }
 }
