@@ -34,18 +34,20 @@ class RegisteredUserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'g-recaptcha-response' => [new ReCaptcha()],
-        ]);
+        ]); 
 
         if ($validator->fails()) {
             throw new ValidationException($validator);
         }
-        $request->validate([
-            'nombre' => ['required', 'string', 'max:255'],
-            'primer_apellido' => ['required', 'string', 'max:255'],
-            'segundo_apellido' => ['nullable', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Usuario::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        
+    $request->validate([
+        'nombre' => ['required', 'string', 'max:255'],
+        'primer_apellido' => ['required', 'string', 'max:255'],
+        'segundo_apellido' => ['nullable', 'string', 'max:255'],
+        'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Usuario::class],
+        'password' => ['required', 'confirmed', Rules\Password::defaults()],
+    ]);
+
 
         $user = Usuario::create([
             'nombre' => $request->nombre,
@@ -54,11 +56,16 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+    
+        $user->assignRole('asistente'); 
 
+      
         event(new Registered($user));
 
+      
         Auth::login($user);
 
+     
         return redirect(route('dashboard', absolute: false));
     }
 }

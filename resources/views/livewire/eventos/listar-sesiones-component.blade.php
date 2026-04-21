@@ -17,6 +17,7 @@
                 </a>
 
                 {{-- Botón nueva sesión --}}
+            @can('crear-eventos')
                 <x-primary-button
                     type="button"
                     wire:click="$dispatch('abrir-modal-registrar-sesion', { idEvento: {{ $evento->id_evento }} })"
@@ -24,6 +25,7 @@
                     <i class="fa-solid fa-plus mr-2"></i>
                     <span>Agregar sesión</span>
                 </x-primary-button>
+            @endcan
             </div>
         </div>
 
@@ -75,20 +77,23 @@
                                     
                                     <td class="p-2">
                                         <div class="flex items-center justify-center gap-2">
+                                            @can('editar-eventos')
                                             <x-action-button
                                                 class="bg-sky-600"
                                                 wire:click="$dispatch('abrir-modal-registrar-sesion', { idEvento: {{ $evento->id_evento }}, idSesion: {{ $sesion->id_sesion }} })"
                                             >
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </x-action-button>
+                                            @endcan
 
-                                            {{-- Botón eliminar: Ahora manda el NOMBRE real --}}
+                                           @can('borrar-eventos')
                                             <x-action-button 
                                                 class="bg-red-600" 
                                                 wire:click="$dispatch('abrir-modal-eliminar-sesion', { idSesion: {{ $sesion->id_sesion }}, nombreSesion: '{{ $sesion->nombre }}' })"
                                             >
                                                 <i class="fa-solid fa-trash"></i>
                                             </x-action-button>
+                                            @endcan
                                         </div>
                                     </td>
                                 </tr>

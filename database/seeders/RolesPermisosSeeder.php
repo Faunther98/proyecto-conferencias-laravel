@@ -9,73 +9,89 @@ use Spatie\Permission\Models\Role;
 
 class RolesPermisosSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        Role::create(['name' => 'administrador']);
 
-        Permission::create(['name' => 'registrar-usuario']);
-        Permission::create(['name' => 'consultar-listado-usuarios']);
-        Permission::create(['name' => 'cambiar-estatus-usuario']);
+        $rolAdmin = Role::firstOrCreate(['name' => 'administrador']);
+        $rolOrganizador = Role::firstOrCreate(['name' => 'organizador']);
+        $rolAsistente = Role::firstOrCreate(['name' => 'asistente']);
 
-        Permission::create(['name' => 'registrar-rol']);
-        Permission::create(['name' => 'consultar-listado-roles']);
 
-        $role = Role::findByName('administrador');
+        Permission::firstOrCreate(['name' => 'registrar-usuario']);
+        Permission::firstOrCreate(['name' => 'consultar-listado-usuarios']);
+        Permission::firstOrCreate(['name' => 'cambiar-estatus-usuario']);
+        Permission::firstOrCreate(['name' => 'registrar-rol']);
+        Permission::firstOrCreate(['name' => 'consultar-listado-roles']);
 
-        $role->givePermissionTo('registrar-usuario');
-        $role->givePermissionTo('consultar-listado-usuarios');
-        $role->givePermissionTo('cambiar-estatus-usuario');
 
-        $role->givePermissionTo('registrar-rol');
-        $role->givePermissionTo('consultar-listado-roles');
+        Permission::firstOrCreate(['name' => 'ver-eventos']); 
+        Permission::firstOrCreate(['name' => 'crear-eventos']);
+        Permission::firstOrCreate(['name' => 'editar-eventos']);
+        Permission::firstOrCreate(['name' => 'borrar-eventos']);
+        Permission::firstOrCreate(['name' => 'pasar-asistencia']);
 
-        $adminUser = Usuario::firstOrCreate(
+        $permisosAsistente = [
+            'inscribirse-eventos',
+            'cancelar-inscripcion',
+            'ver-mis-inscripciones'
+        ];
+
+        foreach ($permisosAsistente as $permiso) {
+            Permission::firstOrCreate(['name' => $permiso]);
+        }
+
+
+        $permisosParaAdmin = Permission::whereNotIn('name', $permisosAsistente)->get();
+        $rolAdmin->syncPermissions($permisosParaAdmin);
+
+        
+        $rolOrganizador->syncPermissions([
+            'ver-eventos',
+            'crear-eventos',
+            'editar-eventos',
+            'borrar-eventos',
+            'pasar-asistencia'
+        ]);
+
+        
+        $rolAsistente->syncPermissions($permisosAsistente);
+
+        
+        
+        // Admin
+        Usuario::updateOrCreate(
             ['email' => 'admin@mail.com'], 
-            
             [ 
                 'nombre' => 'Admin',
-                'primer_apellido' => 'Admin',
-                'segundo_apellido' => 'Admin',
+                'primer_apellido' => 'General',
+                'segundo_apellido' => 'Sistema',
                 'curp' => 'AAAA000000AAAAAA00',
                 'password' => bcrypt('password'),
             ]
-        );
+        )->assignRole('administrador');
 
-        $adminUser->assignRole('administrador');
-
-        Role::firstOrCreate(['name' => 'organizador']);
-        Role::firstOrCreate(['name' => 'asistente']);
-
-        $organizadorUser = Usuario::firstOrCreate(
+        // Organizador
+        Usuario::updateOrCreate(
             ['email' => 'organizador@mail.com'], 
-
             [ 
-                'nombre' => 'Organizador',
+                'nombre' => 'Paco',
                 'primer_apellido' => 'Organizador',
-                'segundo_apellido' => 'Organizador',
+                'segundo_apellido' => 'DGTIC',
                 'curp' => 'ORGA000000AAAAAA00',
                 'password' => bcrypt('password'),
             ]
-        );
-        $organizadorUser->assignRole('organizador');
+        )->assignRole('organizador');
 
-        $asistenteUser = Usuario::firstOrCreate(
+        // Asistente
+        Usuario::updateOrCreate(
             ['email' => 'asistente@mail.com'],
             [
-                'nombre' => 'Asistente',
+                'nombre' => 'Luis',
                 'primer_apellido' => 'Asistente',
-                'segundo_apellido' => 'Asistente',
+                'segundo_apellido' => 'Pruebas',
                 'curp' => 'ASIS000000AAAAAA00',
                 'password' => bcrypt('password'),
             ]
-        );
-        $asistenteUser->assignRole('asistente');
-
-
-
-
+        )->assignRole('asistente');
     }
 }

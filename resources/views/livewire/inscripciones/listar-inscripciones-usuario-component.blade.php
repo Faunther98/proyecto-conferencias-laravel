@@ -26,14 +26,25 @@
                                     {{ $inscripcion->evento->fecha_fin->format('d/m/Y') }}
                                 </td>
                                 <td class="p-2 text-center">
-                               
-                                    <x-action-button 
-                                        class="bg-red-600" 
-                                        data-tippy="Cancelar mi inscripción" 
-                                        wire:click="$dispatch('abrir-modal-cancelar-inscripcion', { idInscripcion: {{ $inscripcion->id_inscripcion }}, nombreEvento: '{{ $inscripcion->evento->nombre }}' })">
-                                        <i class="fa-solid fa-user-minus"></i>
+                                    <div class="flex items-center justify-center gap-2"> 
                                         
-                                    </x-action-button>
+                                        <x-action-button 
+                                            class="bg-primario-500 hover:bg-secundario-500" 
+                                            data-tippy="Ver sesiones del evento" 
+                                            wire:click="$dispatch('abrir-modal-ver-sesiones', { idEvento: {{ $inscripcion->id_evento }} })">
+                                            <i class="fa-solid fa-calendar-days text-white"></i>
+                                        </x-action-button>
+                                
+                                        @can('cancelar-inscripcion')
+                                            <x-action-button 
+                                                class="bg-red-600 hover:bg-red-700" 
+                                                data-tippy="Cancelar mi inscripción" 
+                                                wire:click="$dispatch('abrir-modal-cancelar-inscripcion', { idInscripcion: {{ $inscripcion->id_inscripcion }}, nombreEvento: '{{ $inscripcion->evento->nombre }}' })">
+                                                <i class="fa-solid fa-user-minus"></i>
+                                            </x-action-button>
+                                        @endcan
+                                
+                                    </div>
                                 </td>
                             </tr>
                         @empty
@@ -49,6 +60,7 @@
         </div>
 
         <livewire:inscripciones.cancelar-inscripcion-component />
+        <livewire:eventos.ver-sesiones-component/>
         
     </div>
 </div>

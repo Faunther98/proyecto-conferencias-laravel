@@ -7,12 +7,14 @@
 
         <div class="w-full lg:w-[900px] mx-auto">
             <div class="flex justify-end items-center mt-5 mb-2">
+            @can('crear-eventos')
                 <x-action-button
                     wire:click="$dispatch('abrir-modal-registrar-evento', { idEvento: null })"
                     class="bg-[#74b961] flex items-center gap-2 w-auto px-4 text-base rounded-md">
                     <i class="fa-solid fa-plus"></i>
                     <span>Agregar Evento</span>
                 </x-action-button>
+            @endcan
             </div>
         </div>
 
@@ -58,14 +60,17 @@
                                         </a>
 
                                         {{-- Botón Editar --}}
+                                    @can('editar-eventos')
                                         <x-action-button class="bg-sky-600" data-tippy="Editar" wire:click="$dispatch('abrir-modal-registrar-evento', { idEvento: {{ $evento->id_evento }} })">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </x-action-button>
-
+                                    @endcan
                                         {{-- Botón Eliminar --}}
+                                    @can('borrar-eventos')
                                         <x-action-button class="bg-red-600" data-tippy="Eliminar" wire:click="$dispatch('abrir-modal-eliminar-evento', { idEvento: {{ $evento->id_evento }}, nombreEvento: '{{ $evento->nombre }}' })">
                                             <i class="fa-solid fa-trash"></i>
                                         </x-action-button>
+                                    @endcan
                                     </div>
                                 </td>
                             </tr>
