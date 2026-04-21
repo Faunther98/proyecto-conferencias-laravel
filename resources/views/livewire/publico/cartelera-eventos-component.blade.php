@@ -6,27 +6,27 @@
         </div>
         <br>
 
-        {{-- Grid responsivo de tarjetas --}}
+        {{-- Tarjetas --}}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
             @forelse ($eventos as $evento)
                 <div class="flex flex-col bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
                     
-                    {{-- Encabezado de la Tarjeta --}}
+                    
                     <div class="p-5 border-b border-gray-100 bg-gray-50/50">
                         <div class="flex justify-between items-start gap-2">
                             <h2 class="text-xl font-bold text-gray-800 leading-tight">
                                 {{ $evento->nombre }}
                             </h2>
 
-                            {{-- Badge de Estado (S/N) --}}
+                            
                             <span class="{{ $evento->estado->value == 'S' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }} px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">
                                 {{ $evento->estado->etiqueta() }}
                             </span>
                         </div>
                     </div>
 
-                    {{-- Cuerpo de la Tarjeta con detalles --}}
+                    
                     <div class="p-6 flex-grow space-y-4">
                         <div class="flex items-center text-gray-600 italic">
                             <i class="fa-solid fa-location-dot w-6 text-red-500"></i>

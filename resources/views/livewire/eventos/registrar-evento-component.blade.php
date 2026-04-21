@@ -12,7 +12,7 @@
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             
-            {{-- Nombre del Evento --}}
+            
             <div class="flex flex-col md:col-span-2">
                 <x-input-label>
                     Nombre del evento <span class="text-red-500">*</span>
@@ -24,7 +24,7 @@
                 @enderror
             </div>
 
-            {{-- Lugar / Sede --}}
+            
             <div class="flex flex-col">
                 <x-input-label>
                     Lugar o Sede <span class="text-red-500">*</span>
@@ -36,7 +36,7 @@
                 @enderror
             </div>
 
-            {{-- Capacidad --}}
+            
             <div class="flex flex-col">
                 <x-input-label>
                     Capacidad de asistentes <span class="text-red-500">*</span>
@@ -48,7 +48,7 @@
                 @enderror
             </div>
 
-            {{-- Fecha de Inicio --}}
+            
             <div class="flex flex-col">
                 <x-input-label>
                     Fecha de inicio <span class="text-red-500">*</span>
@@ -60,7 +60,7 @@
                 @enderror
             </div>
 
-            {{-- Fecha de Fin --}}
+            
             <div class="flex flex-col">
                 <x-input-label>
                     Fecha de término <span class="text-red-500">*</span>
@@ -72,7 +72,7 @@
                 @enderror
             </div>
 
-            {{-- Estatus / Estado --}}
+            
             <div class="flex flex-col md:col-span-2">
                 <x-input-label>
                     Estatus del evento <span class="text-red-500">*</span>

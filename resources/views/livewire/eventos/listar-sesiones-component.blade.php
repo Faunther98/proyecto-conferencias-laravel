@@ -8,7 +8,7 @@
             </h2>
             
             <div class="flex gap-2 items-center">
-                {{-- Botón de Regresar  --}}
+                
                 <a href="{{ route('eventos.listar') }}" class="inline-flex items-center">
                     <x-secondary-button type="button" class="flex items-center justify-center">
                         <i class="fa-solid fa-arrow-left mr-2"></i>
@@ -16,7 +16,7 @@
                     </x-secondary-button>
                 </a>
 
-                {{-- Botón nueva sesión --}}
+                
             @can('crear-eventos')
                 <x-primary-button
                     type="button"

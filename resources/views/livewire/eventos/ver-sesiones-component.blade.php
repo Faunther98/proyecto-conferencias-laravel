@@ -6,7 +6,7 @@
         </x-slot>
 
         <x-slot name="content">
-            {{-- Info general del lugar --}}
+            
             <div class="mb-5 p-3 bg-blue-50 border-l-4 border-primario-500 text-sm text-primario-500">
                 <i class="fa-solid fa-circle-info mr-2 text-primario-500"></i>
                 Este evento se llevará a cabo en: <strong>{{ $eventoSeleccionado?->lugar }}</strong>

@@ -5,7 +5,7 @@
             {{ $form->esEdicion ? 'Editar sesión' : 'Nueva sesión' }}
         </x-slot>
 
-        {{-- Inputs --}}
+       
         <x-slot name="content">
             <div class="Leyenda mb-4 text-sm text-gray-600">
                 Los campos marcados con <span class="text-red-500">*</span> son obligatorios.
@@ -13,7 +13,6 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                {{-- Nombre de la Sesión --}}
                 <div class="flex flex-col md:col-span-2">
                     <x-input-label>
                         Nombre de la sesión <span class="text-red-500">*</span>
@@ -26,7 +25,7 @@
                     @enderror
                 </div>
                 
-                {{-- Ponente --}}
+               
                 <div class="flex flex-col md:col-span-2">
                     <x-input-label>
                         Nombre del ponente <span class="text-red-500">*</span>
@@ -50,7 +49,7 @@
                     @enderror
                 </div>
 
-                {{-- Hora Inicio --}}
+               
                 <div class="flex flex-col">
                     <x-input-label>
                         Hora de inicio <span class="text-red-500">*</span>
@@ -62,7 +61,7 @@
                     @enderror
                 </div>
 
-                {{-- Hora Fin --}}
+                
                 <div class="flex flex-col">
                     <x-input-label>
                         Hora de término <span class="text-red-500">*</span>
@@ -74,7 +73,7 @@
                     @enderror
                 </div>
 
-                {{-- Estatus / Estado --}}
+                
                 <div class="flex flex-col md:col-span-2">
                     <x-input-label>
                         Estatus de la sesión <span class="text-red-500">*</span>
