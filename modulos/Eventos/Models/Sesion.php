@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modulos\Eventos\Models\Evento;
 
+use App\QueryBuilders\SesionQueryBuilder;
+
 
 class Sesion extends Model
 {
@@ -30,5 +32,10 @@ class Sesion extends Model
 
     public function evento (){
         return $this->belongsTo(Evento::class, 'id_evento', 'id_evento'); 
+    }
+
+    public function newEloquentBuilder($query): SesionQueryBuilder
+    {
+        return new SesionQueryBuilder($query);
     }
 }
